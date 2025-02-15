@@ -1,4 +1,5 @@
 import pandas as pd
+from datetime import datetime, timedelta
 
 class Time_Block:
     def __init__(self, start_time, end_time, day):
@@ -35,8 +36,8 @@ class MTA:
         for time in self.times:
             ret_str += f"{time}\n"
         return ret_str
-
-def main():
+    
+def read_mtas():
     mtas_df = pd.read_excel("DATA/mtas.xlsx")
     mta_type_df = pd.read_excel("DATA/mta_type_availability.xlsx")
     student_df = pd.read_excel("DATA/student_unavailability.xlsx")
@@ -47,9 +48,9 @@ def main():
         if isinstance(student, str):
             curr_student = student
         try:
-            student_times[curr_student].append(Time_Block(data["Unavailability Start Time"], data["Unavailability End Time"], data["Unavailability Day"]))
+            student_times[curr_student].append(Time_Block(datetime.combine(datetime.today(), data["Unavailability Start Time"]), datetime.combine(datetime.today(), data["Unavailability End Time"]), data["Unavailability Day"]))
         except:
-            student_times[curr_student] = [Time_Block(data["Unavailability Start Time"], data["Unavailability End Time"], data["Unavailability Day"])]
+            student_times[curr_student] = [Time_Block(datetime.combine(datetime.today(), data["Unavailability Start Time"]), datetime.combine(datetime.today(), data["Unavailability End Time"]), data["Unavailability Day"])]
     students = {}
     for key in student_times.keys():
         students[key] = (Student(key, student_times[key]))
@@ -60,9 +61,9 @@ def main():
         if isinstance(mta_type, str):
             curr_type = mta_type
         try:
-            mta_times[curr_type].append(Time_Block(data["Availability Start Time"], data["Availability End Time"], data["Availability Day"]))
+            mta_times[curr_type].append(Time_Block(datetime.combine(datetime.today(), data["Availability Start Time"]), datetime.combine(datetime.today(), data["Availability End Time"]), data["Availability Day"]))
         except:
-            mta_times[curr_type] = [Time_Block(data["Availability Start Time"], data["Availability End Time"], data["Availability Day"])]
+            mta_times[curr_type] = [Time_Block(datetime.combine(datetime.today(), data["Availability Start Time"]), datetime.combine(datetime.today(), data["Availability End Time"]), data["Availability Day"])]
     mtas = []
     for row in mtas_df.iterrows():
         data = row[1]
@@ -72,10 +73,27 @@ def main():
             student_list.append(students[student])
         mta_type = data["Type"]
         mtas.append(MTA(student_list, mta_type, mta_times[mta_type], data["Length (minutes)"]))
-    print(mtas[1])
+    return mtas
 
+def get_domains(mtas: list[MTA]):
+    domains = []
+    for mta in mtas:
+        domain = []
+        for time in mta.times:
+            curr_time = time.start_time
+            while curr_time < time.end_time - timedelta(minutes=mta.length):
+                domain.append(curr_time)
+                curr_time += timedelta(minutes=5)
+        domains.append(domain)
+    return domains
 
+def backtrack(mtas, domains, next_var):
+    pass
 
+def main():
+    mtas = read_mtas()
+    domains = get_domains(mtas)
+    print(domains)
 
 if __name__=="__main__":
     main()
