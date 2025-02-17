@@ -2,7 +2,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 
 class Time_Block:
-    def __init__(self, start_time, end_time, day):
+    def __init__(self, start_time: datetime, end_time: datetime, day):
         self.start_time = start_time
         self.end_time = end_time
         self.day = day
@@ -20,9 +20,20 @@ class Student:
         for time in self.unavailable_times:
             ret_str += f"{time}\n"
         return ret_str
+    
+class MTA_Type:
+    def __init__(self, name, times):
+        self.name = name
+        self.times = times
+
+    def __str__(self):
+        ret_str = f"{self.name}:\n"
+        for time in self.times:
+            ret_str += f"{time}\n"
+        return ret_str
 
 class MTA:
-    def __init__(self, students: list[Student], type, times: list[Time_Block], length):
+    def __init__(self, students: list[Student], type: MTA_Type, times: list[Time_Block], length):
         self.students = students
         self.type = type
         self.times = times
@@ -64,6 +75,9 @@ def read_mtas():
             mta_times[curr_type].append(Time_Block(datetime.combine(datetime.today(), data["Availability Start Time"]), datetime.combine(datetime.today(), data["Availability End Time"]), data["Availability Day"]))
         except:
             mta_times[curr_type] = [Time_Block(datetime.combine(datetime.today(), data["Availability Start Time"]), datetime.combine(datetime.today(), data["Availability End Time"]), data["Availability Day"])]
+    mta_types = {}
+    for key, value in mta_times.items():
+        mta_types[key] = MTA_Type(key, value)
     mtas = []
     for row in mtas_df.iterrows():
         data = row[1]
@@ -72,13 +86,32 @@ def read_mtas():
         for student in students_str:
             student_list.append(students[student])
         mta_type = data["Type"]
-        mtas.append(MTA(student_list, mta_type, mta_times[mta_type], data["Length (minutes)"]))
+        mtas.append(MTA(student_list, mta_types[mta_type], mta_types[mta_type].times, data["Length (minutes)"]))
     return mtas
 
 def get_domains(mtas: list[MTA]):
     domains = []
     for mta in mtas:
         domain = []
+        to_add = {}
+        for time in mta.times:
+            for student in mta.students:
+                for unavailable in student.unavailable_times:
+                    if time.day != unavailable.day:
+                        continue
+                    if unavailable.start_time <= time.start_time and unavailable.end_time >= time.end_time:
+                        mta.times.remove(time)
+                        removed = True
+                        break
+                    if unavailable.start_time > time.start_time and unavailable.end_time < time.end_time:
+                        time.end_time = unavailable.start_time
+                        to_add[mta.times.index(time)] = Time_Block(unavailable.end_time, time.end_time, time.day)
+                if removed:
+                    break
+            if removed:
+                continue
+        for key, value in to_add.items():
+            mta.times.insert(key, value)
         for time in mta.times:
             curr_time = time.start_time
             while curr_time < time.end_time - timedelta(minutes=mta.length):
@@ -92,8 +125,12 @@ def backtrack(mtas, domains, next_var):
 
 def main():
     mtas = read_mtas()
+    print(mtas[0])
     domains = get_domains(mtas)
-    print(domains)
+    for item in domains[0]:
+        print(item)
+    
+    
 
 if __name__=="__main__":
     main()
