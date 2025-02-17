@@ -106,6 +106,10 @@ def get_domains(mtas: list[MTA]):
                     if unavailable.start_time > time.start_time and unavailable.end_time < time.end_time:
                         time.end_time = unavailable.start_time
                         to_add[mta.times.index(time)] = Time_Block(unavailable.end_time, time.end_time, time.day)
+                    if unavailable.start_time == time.start_time and unavailable.end_time < time.end_time:
+                        time.start_time = unavailable.end_time
+                    if unavailable.start_time > time.start_time and unavailable.end_time == time.end_time:
+                        time.end_time = unavailable.start_time
                 if removed:
                     break
             if removed:
@@ -114,14 +118,17 @@ def get_domains(mtas: list[MTA]):
             mta.times.insert(key, value)
         for time in mta.times:
             curr_time = time.start_time
-            while curr_time < time.end_time - timedelta(minutes=mta.length):
+            while curr_time <= time.end_time - timedelta(minutes=mta.length):
                 domain.append(curr_time)
                 curr_time += timedelta(minutes=5)
         domains.append(domain)
     return domains
 
 def backtrack(mtas, domains, next_var):
-    pass
+    if next_var == len(mtas):
+        return domains
+    for value in domains[next_var]:
+        pass
 
 def main():
     mtas = read_mtas()
