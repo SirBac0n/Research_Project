@@ -89,12 +89,15 @@ def read_mtas():
         mtas.append(MTA(student_list, mta_types[mta_type], mta_types[mta_type].times, data["Length (minutes)"]))
     return mtas
 
-def get_domains(mtas: list[MTA]):
+def get_domains(mtas: list[MTA], idx = 0):
     domains = []
-    for mta in mtas:
+    for i in range(idx, len(mtas)):
+        mta = mtas[i]
+    #for mta in mtas:
         domain = []
         to_add = {}
         for time in mta.times:
+            removed = False
             for student in mta.students:
                 for unavailable in student.unavailable_times:
                     if time.day != unavailable.day:
@@ -119,25 +122,42 @@ def get_domains(mtas: list[MTA]):
         for time in mta.times:
             curr_time = time.start_time
             while curr_time <= time.end_time - timedelta(minutes=mta.length):
-                domain.append(curr_time)
+                domain.append(Time_Block(curr_time, curr_time + timedelta(minutes=mta.length), time.day))
                 curr_time += timedelta(minutes=5)
         domains.append(domain)
     return domains
 
-def backtrack(mtas, domains, next_var):
+def backtrack(mtas: list[MTA], domains: list[Time_Block], next_var):
     if next_var == len(mtas):
         return domains
     for value in domains[next_var]:
-        pass
+        for time in mtas[next_var].type.times:
+            if value.day == time.day and value.start_time >= time.start_time and value.end_time <= time.end_time:
+                new_mtas = mtas.copy()
+                new_time = new_mtas[next_var].type.times[new_mtas[next_var].type.times.index(time)]
+                if value.start_time == time.start_time:
+                    new_time.start_time = value.end_time
+                if value.end_time == time.end_time:
+                    new_time.end_time = value.start_time
+                if value.start_time > time.start_time and value.end_time < time.end_time:
+                    new_mtas[next_var].type.times.insert(time, Time_Block(value.end_time, new_time.end_time, value.day))
+                    new_time.end_time = value.start_time
+                for student in new_mtas[next_var].students:
+                    student.unavailable_times.append(value)
+                new_domains = get_domains(new_mtas, next_var)
+                print(len(new_domains))
+                print(next_var)
+                new_domains[next_var] = value
+                result = backtrack(new_mtas, new_domains, next_var + 1)
+                if result:
+                    return result
+    return None 
 
 def main():
     mtas = read_mtas()
-    print(mtas[0])
     domains = get_domains(mtas)
-    for item in domains[0]:
-        print(item)
-    
-    
+    result = backtrack(mtas, domains, 0)
+    print(len(result))
 
 if __name__=="__main__":
     main()
