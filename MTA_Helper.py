@@ -49,7 +49,8 @@ class MTA_Type:
 
 class MTA:
     """
-    Represents an individual MTA that stores a list of students participating, the type of the MTA, 
+    Represents an individual MTA that stores a list of students participating, the type of the MTA,
+     
     the available times for this individual MTA, and the length of the MTA
     """
 

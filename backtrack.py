@@ -8,6 +8,7 @@ def get_domains(mtas: list[MTA], idx: int = 0) -> list[list[Time_Block]]:
     Creates the domains for the mtas starting from idx until reaching the end of the list of mtas
 
     mtas: the list of MTAs
+
     idx: the index to start from to generate domains
 
     return: a list representing the domains of the MTAs
@@ -81,8 +82,11 @@ def backtrack(
     Runs basic backtracking search on the given MTA problem
 
     mtas: the list of MTAs
+
     domains: the list of domains for each MTA
+
     next_var: the index of the next variable to assign
+
     buffer: the amount of time a student needs between scheduled MTAs
 
     return: a list representing the time slot assignment for each MTA
