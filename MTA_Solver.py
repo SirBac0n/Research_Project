@@ -23,7 +23,7 @@ def read_mtas():
         if isinstance(student, str):
             curr_student = student
         try:
-            student_times[curr_student].append(
+            student_times[curr_student].append( #type: ignore
                 Time_Block(
                     datetime.combine(
                         datetime.today(), data["Unavailability Start Time"]
@@ -33,7 +33,7 @@ def read_mtas():
                 )
             )
         except:
-            student_times[curr_student] = [
+            student_times[curr_student] = [ #type: ignore
                 Time_Block(
                     datetime.combine(
                         datetime.today(), data["Unavailability Start Time"]
@@ -53,15 +53,15 @@ def read_mtas():
         if isinstance(mta_type, str):
             curr_type = mta_type
         try:
-            mta_times[curr_type].append(
+            mta_times[curr_type].append( #type: ignore
                 Time_Block(
                     datetime.combine(datetime.today(), data["Availability Start Time"]),
                     datetime.combine(datetime.today(), data["Availability End Time"]),
                     data["Availability Day"],
                 )
-            )
+            ) 
         except:
-            mta_times[curr_type] = [
+            mta_times[curr_type] = [ #type: ignore
                 Time_Block(
                     datetime.combine(datetime.today(), data["Availability Start Time"]),
                     datetime.combine(datetime.today(), data["Availability End Time"]),
@@ -98,7 +98,7 @@ def main():
     mtas = read_mtas()
     domains = get_domains(mtas)
     result = backtrack(mtas, domains)
-    for item in result:
+    for item in result: #type: ignore
         print(item)
 
 
