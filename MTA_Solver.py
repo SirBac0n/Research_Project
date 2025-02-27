@@ -2,7 +2,9 @@ from datetime import datetime
 
 import pandas as pd
 
-from backtrack import backtrack, get_domains
+from backtrack import backtrack
+from remembering_no_goods import remembering_no_goods
+from domain_helper import get_domains
 from MTA_Helper import MTA, MTA_Type, Student, Time_Block
 
 
@@ -97,7 +99,7 @@ def main():
     """
     mtas = read_mtas()
     domains = get_domains(mtas)
-    result = backtrack(mtas, domains)
+    result = remembering_no_goods(mtas, domains)
     for item in result: #type: ignore
         print(item)
 

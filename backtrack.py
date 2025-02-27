@@ -50,7 +50,7 @@ def backtrack(
                 if not consistent:
                     break
                 new_mtas = mtas.copy()
-                new_times = new_mtas[next_var].type.times
+                new_times = new_mtas[next_var].type.times.copy()
                 new_time = new_times[new_times.index(time)]
                 # update the available times for the type of MTA after assigning
                 if value.start_time == time.start_time:
