@@ -9,7 +9,15 @@ days_of_the_week: list[str] = ['Monday','Tuesday','Wednesday','Thursday','Friday
 
 def generate_students(n: int) -> list[str]:
     fake: Faker = Faker()
-    return [fake.name() for _ in range(n)]
+    names: list[str] = []
+    # Generate n names
+    for _ in range(n):
+        # Make sure name does not contain ','
+        name: str = ','
+        while ',' in name:
+            name = fake.name()
+        names.append(name)
+    return names
 
 def generate_time_tuple(min_time: str, max_time: str, min_hours_dif: int = 1) -> tuple[str, str]:
     """Get a tuple of random time strings between two times. Does not work if HH equals '00'
@@ -68,19 +76,10 @@ def random_time_range(start_time_input: str, end_time_input: str):
     else:
         minutes = randrange(0, 12) * 5
 
-    # if start_seconds == end_seconds:
-    #     seconds = start_seconds
-    # elif start_seconds > end_seconds:
-    #     seconds = randrange(int(start_seconds), int(59))
-    # elif start_seconds < end_seconds:
-    #     seconds = randrange(int(start_seconds), int(end_seconds))
-
     h = int(hours)
     m = int(minutes)
-    #am: bool = True if h < 12 else False
-    #h = h if am else h % 12
 
-    return f"{h:02d}:{m:02d}" #:00 {'AM' if am else 'PM'}
+    return f"{h:02d}:{m:02d}"
 
 def generate_mta_availabilities(min_time: str = '09:00', max_time: str = '17:00', file_path: str | None = 'DATA/mta_type_availability.xlsx') -> pd.DataFrame:
     # Initialize the dataframe
@@ -120,5 +119,26 @@ def generate_student_unavailabilities(students: list[str], min_time: str = '09:0
     
     return df
 
+def generate_mtas(students: list[str], n: int, max_stuends_per_mta: int = 5, mta_lengths: list[int] = [30,45], file_path: str | None = 'DATA/mtas.xlsx') -> pd.DataFrame: 
+    # Initialize the dataframe
+    df = pd.DataFrame(columns=['Type','Students','Length (minutes)','Name'])
+    # Generate n different MTA's
+    for i in range(n):
+        # Choose students for the mta
+        mta_students: list[str] = random.sample(students,randrange(1,max_stuends_per_mta+1))
+        # Choose a random MTA type
+        mta_type: str = mta_types[randrange(0,len(mta_types))]
+        # Chose a random MTA length
+        mta_length = mta_lengths[randrange(0,len(mta_lengths))]
+        # Add new values to df
+        df.loc[len(df)] = [mta_type,', '.join(mta_students),mta_length,f'MTA {i+1}']
+
+    # Save the file if file_path is given
+    if file_path is not None:
+        df.to_excel(file_path,index=False,sheet_name='mtas')    
+
+    return df
+
 if __name__ == '__main__':
-    generate_student_unavailabilities(generate_students(8))
+    print(generate_mtas(generate_students(5),11))
+    #generate_student_unavailabilities(generate_students(8))
