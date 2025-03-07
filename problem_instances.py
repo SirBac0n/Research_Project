@@ -11,7 +11,7 @@ def generate_students(n: int) -> list[str]:
     fake: Faker = Faker()
     return [fake.name() for _ in range(n)]
 
-def generate_mta_availability_times(min_time: str, max_time: str, min_hours_dif: int = 1) -> tuple[str, str]:
+def generate_time_tuple(min_time: str, max_time: str, min_hours_dif: int = 1) -> tuple[str, str]:
     """Get a tuple of random time strings between two times. Does not work if HH equals '00'
 
     min_time and max_time are both of the format HH:MM (e.g. '14:25')
@@ -82,7 +82,7 @@ def random_time_range(start_time_input: str, end_time_input: str):
 
     return f"{h:02d}:{m:02d}" #:00 {'AM' if am else 'PM'}
 
-def generate_mta_availabilities(min_time: str = '09:00', max_time: str = '17:00',file_path: str | None = 'DATA/mta_type_availability.xlsx') -> pd.DataFrame:
+def generate_mta_availabilities(min_time: str = '09:00', max_time: str = '17:00', file_path: str | None = 'DATA/mta_type_availability.xlsx') -> pd.DataFrame:
     # Initialize the dataframe
     df = pd.DataFrame(columns=['Type','Availability Day','Availability Start Time','Availability End Time'])
     # Loop through all the MTA types
@@ -92,14 +92,33 @@ def generate_mta_availabilities(min_time: str = '09:00', max_time: str = '17:00'
         available_days: list[str] = random.sample(days_of_the_week,randrange(1,len(days_of_the_week)))
         for day in available_days:
             # Generate the df entry for this day
-            df.loc[len(df)] = [mta_type if first_entry else '',day,*generate_mta_availability_times(min_time, max_time)]
+            df.loc[len(df)] = [mta_type if first_entry else '',day,*generate_time_tuple(min_time, max_time)]
             first_entry = False
 
     # Save the file if file_path is given
     if file_path is not None:
-        df.to_excel(file_path,index=False)    
+        df.to_excel(file_path,index=False,sheet_name='mta_type_availability')    
 
     return df
 
+def generate_student_unavailabilities(students: list[str], min_time: str = '09:00', max_time: str = '17:00',file_path: str | None = 'DATA/student_unavailability.xlsx') -> pd.DataFrame:
+    # Initialize the dataframe
+    df = pd.DataFrame(columns=['Student Name','Availability Day','Availability Start Time','Availability End Time'])
+    # Loop through all the students
+    for student in students:
+        first_entry: bool = True
+        # Loop through all the randomly chosen days
+        available_days: list[str] = random.sample(days_of_the_week,randrange(1,len(days_of_the_week)))
+        for day in available_days:
+            # Generate the df entry for this day
+            df.loc[len(df)] = [student if first_entry else '',day,*generate_time_tuple(min_time,max_time)]
+            first_entry = False
+
+    # Save the file if file_path is given
+    if file_path is not None:
+        df.to_excel(file_path,index=False,sheet_name='student_unavailability')    
+    
+    return df
+
 if __name__ == '__main__':
-    generate_mta_availabilities()
+    generate_student_unavailabilities(generate_students(8))
