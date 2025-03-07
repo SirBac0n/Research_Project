@@ -2,6 +2,7 @@ import random
 from faker import Faker
 from random import randrange
 import pandas as pd
+import sys
 
 # Create initialized global list variables
 mta_types: list[str] = ['Preaching','Apologetics','Music','Puppetry','Bible Teaching','Inspirational Writing','Drama','Gospel Art','Sign Language','Worship Leading']
@@ -94,6 +95,10 @@ def generate_mta_availabilities(min_time: str = '09:00', max_time: str = '17:00'
             df.loc[len(df)] = [mta_type if first_entry else '',day,*generate_time_tuple(min_time, max_time)]
             first_entry = False
 
+    # Reformat to datetime
+    df['Availability Start Time'] = pd.to_datetime(df['Availability Start Time'], format='mixed')
+    df['Availability End Time'] = pd.to_datetime(df['Availability End Time'], format='mixed')
+
     # Save the file if file_path is given
     if file_path is not None:
         df.to_excel(file_path,index=False,sheet_name='mta_type_availability')    
@@ -102,7 +107,7 @@ def generate_mta_availabilities(min_time: str = '09:00', max_time: str = '17:00'
 
 def generate_student_unavailabilities(students: list[str], min_time: str = '09:00', max_time: str = '17:00',file_path: str | None = 'DATA/student_unavailability.xlsx') -> pd.DataFrame:
     # Initialize the dataframe
-    df = pd.DataFrame(columns=['Student Name','Availability Day','Availability Start Time','Availability End Time'])
+    df = pd.DataFrame(columns=['Student Name','Unavailability Day','Unavailability Start Time','Unavailability End Time'])
     # Loop through all the students
     for student in students:
         first_entry: bool = True
@@ -113,19 +118,23 @@ def generate_student_unavailabilities(students: list[str], min_time: str = '09:0
             df.loc[len(df)] = [student if first_entry else '',day,*generate_time_tuple(min_time,max_time)]
             first_entry = False
 
+    # Reformat to datetime
+    df['Unavailability Start Time'] = pd.to_datetime(df['Unavailability Start Time'], format='mixed')
+    df['Unavailability End Time'] = pd.to_datetime(df['Unavailability End Time'], format='mixed')
+
     # Save the file if file_path is given
     if file_path is not None:
         df.to_excel(file_path,index=False,sheet_name='student_unavailability')    
     
     return df
 
-def generate_mtas(students: list[str], n: int, max_stuends_per_mta: int = 5, mta_lengths: list[int] = [30,45], file_path: str | None = 'DATA/mtas.xlsx') -> pd.DataFrame: 
+def generate_mtas(students: list[str], n: int, max_students_per_mta: int = 2, mta_lengths: list[int] = [30,45], file_path: str | None = 'DATA/mtas.xlsx') -> pd.DataFrame: 
     # Initialize the dataframe
     df = pd.DataFrame(columns=['Type','Students','Length (minutes)','Name'])
     # Generate n different MTA's
     for i in range(n):
         # Choose students for the mta
-        mta_students: list[str] = random.sample(students,randrange(1,max_stuends_per_mta+1))
+        mta_students: list[str] = random.sample(students,randrange(1,max_students_per_mta+1))
         # Choose a random MTA type
         mta_type: str = mta_types[randrange(0,len(mta_types))]
         # Chose a random MTA length
@@ -139,6 +148,17 @@ def generate_mtas(students: list[str], n: int, max_stuends_per_mta: int = 5, mta
 
     return df
 
+def generate_problem_instances(n_students: int, n_mtas: int):
+    # Generate students
+    students: list[str] = generate_students(n_students)
+    # Generate student unavailabilities
+    generate_student_unavailabilities(students,min_time='09:00',max_time='17:00')
+    # Generate MTA Type availabilities
+    generate_mta_availabilities(min_time='09:00',max_time='17:00')
+    # Generate the MTA's themselves
+    generate_mtas(students,n_mtas,mta_lengths=[30,45])
+
 if __name__ == '__main__':
-    print(generate_mtas(generate_students(5),11))
-    #generate_student_unavailabilities(generate_students(8))
+    n_students = int(sys.argv[1])
+    n_mtas = int(sys.argv[2])
+    generate_problem_instances(n_students,n_mtas)

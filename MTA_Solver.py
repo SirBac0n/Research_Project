@@ -18,7 +18,7 @@ def read_mtas():
     mta_type_df = pd.read_excel("DATA/mta_type_availability.xlsx")
     student_df = pd.read_excel("DATA/student_unavailability.xlsx")
     # create a list of students
-    student_times = {}
+    student_times: dict[str,list[Time_Block]] = {}
     for row in student_df.iterrows():
         data = row[1]
         student = data["Student Name"]
@@ -28,9 +28,9 @@ def read_mtas():
             student_times[curr_student].append( #type: ignore
                 Time_Block(
                     datetime.combine(
-                        datetime.today(), data["Unavailability Start Time"]
+                        datetime.today(), data["Unavailability Start Time"].time()
                     ),
-                    datetime.combine(datetime.today(), data["Unavailability End Time"]),
+                    datetime.combine(datetime.today(), data["Unavailability End Time"].time()),
                     data["Unavailability Day"],
                 )
             )
@@ -38,12 +38,16 @@ def read_mtas():
             student_times[curr_student] = [ #type: ignore
                 Time_Block(
                     datetime.combine(
-                        datetime.today(), data["Unavailability Start Time"]
+                        datetime.today(), data["Unavailability Start Time"].time()
                     ),
-                    datetime.combine(datetime.today(), data["Unavailability End Time"]),
+                    datetime.combine(datetime.today(), data["Unavailability End Time"].time()),
                     data["Unavailability Day"],
                 )
             ]
+    # for key, val in student_times.items():
+    #     print(f"Student: {key}")
+    #     for time in val:
+    #         print(f"\tTime: {time}")
     students = {}
     for key in student_times.keys():
         students[key] = Student(key, student_times[key])
@@ -57,16 +61,16 @@ def read_mtas():
         try:
             mta_times[curr_type].append( #type: ignore
                 Time_Block(
-                    datetime.combine(datetime.today(), data["Availability Start Time"]),
-                    datetime.combine(datetime.today(), data["Availability End Time"]),
+                    datetime.combine(datetime.today(), data["Availability Start Time"].time()),
+                    datetime.combine(datetime.today(), data["Availability End Time"].time()),
                     data["Availability Day"],
                 )
             ) 
         except:
             mta_times[curr_type] = [ #type: ignore
                 Time_Block(
-                    datetime.combine(datetime.today(), data["Availability Start Time"]),
-                    datetime.combine(datetime.today(), data["Availability End Time"]),
+                    datetime.combine(datetime.today(), data["Availability Start Time"].time()),
+                    datetime.combine(datetime.today(), data["Availability End Time"].time()),
                     data["Availability Day"],
                 )
             ]
@@ -99,8 +103,12 @@ def main():
     """
     mtas = read_mtas()
     domains = get_domains(mtas)
-    result = remembering_no_goods(mtas, domains)
-    for item in result: #type: ignore
+    result = backtrack(mtas, domains)
+    if result is None:
+        print("No result found")
+        return
+    print("Result found!")
+    for item in result: 
         print(item)
 
 
