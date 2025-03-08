@@ -8,7 +8,7 @@ from domain_helper import get_domains
 from MTA_Helper import MTA, MTA_Type, Student, Time_Block
 
 
-def read_mtas():
+def read_mtas() -> list[MTA]:
     """
     Creates a list of MTAs from a group of excel files
 
@@ -18,14 +18,15 @@ def read_mtas():
     mta_type_df = pd.read_excel("DATA/mta_type_availability.xlsx")
     student_df = pd.read_excel("DATA/student_unavailability.xlsx")
     # create a list of students
-    student_times: dict[str,list[Time_Block]] = {}
+    student_times: dict[str, list[Time_Block]] = {}
     for row in student_df.iterrows():
         data = row[1]
         student = data["Student Name"]
+        curr_student = ''
         if isinstance(student, str):
             curr_student = student
         try:
-            student_times[curr_student].append( #type: ignore
+            student_times[curr_student].append(
                 Time_Block(
                     datetime.combine(
                         datetime.today(), data["Unavailability Start Time"].time()
@@ -35,7 +36,7 @@ def read_mtas():
                 )
             )
         except:
-            student_times[curr_student] = [ #type: ignore
+            student_times[curr_student] = [
                 Time_Block(
                     datetime.combine(
                         datetime.today(), data["Unavailability Start Time"].time()
@@ -44,41 +45,38 @@ def read_mtas():
                     data["Unavailability Day"],
                 )
             ]
-    # for key, val in student_times.items():
-    #     print(f"Student: {key}")
-    #     for time in val:
-    #         print(f"\tTime: {time}")
-    students = {}
+    students: dict[str, Student] = {}
     for key in student_times.keys():
         students[key] = Student(key, student_times[key])
     # create a list of available times for MTAs
-    mta_times = {}
+    mta_times: dict[str, list[Time_Block]] = {}
     for row in mta_type_df.iterrows():
         data = row[1]
         mta_type = data["Type"]
+        curr_type = ''
         if isinstance(mta_type, str):
             curr_type = mta_type
         try:
-            mta_times[curr_type].append( #type: ignore
+            mta_times[curr_type].append( 
                 Time_Block(
                     datetime.combine(datetime.today(), data["Availability Start Time"].time()),
                     datetime.combine(datetime.today(), data["Availability End Time"].time()),
                     data["Availability Day"],
-                )
+                ) 
             ) 
         except:
-            mta_times[curr_type] = [ #type: ignore
+            mta_times[curr_type] = [
                 Time_Block(
                     datetime.combine(datetime.today(), data["Availability Start Time"].time()),
                     datetime.combine(datetime.today(), data["Availability End Time"].time()),
                     data["Availability Day"],
                 )
             ]
-    mta_types = {}
+    mta_types: dict[str, MTA_Type] = {}
     for key, value in mta_times.items():
         mta_types[key] = MTA_Type(key, value)
     # create a list of MTAs
-    mtas = []
+    mtas: list[MTA] = []
     for row in mtas_df.iterrows():
         data = row[1]
         students_str = data["Students"].split(", ")
