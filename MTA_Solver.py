@@ -100,7 +100,7 @@ def main():
     """
     mtas = read_mtas()
     domains = get_domains(mtas)
-    result = backtrack(mtas, domains)
+    result = backtrack(mtas, domains,remember_no_goods=True)
     if result is None:
         print("No result found")
         return
