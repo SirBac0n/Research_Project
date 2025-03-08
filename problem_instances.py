@@ -20,18 +20,21 @@ def generate_students(n: int) -> list[str]:
         names.append(name)
     return names
 
-def generate_time_tuple(min_time: str, max_time: str, min_hours_dif: int = 1) -> tuple[str, str]:
+def hour_change(time_str: str, hour_change: int) -> str:
+    hour, minute = time_str.split(':')
+    return f'{int(hour)+hour_change}:{minute}'
+
+def generate_time_tuple(min_time: str, max_time: str, min_hours_dif: int = 1, exact_hour: bool = False) -> tuple[str, str]:
     """Get a tuple of random time strings between two times. Does not work if HH equals '00'
 
     min_time and max_time are both of the format HH:MM (e.g. '14:25')
 
     return a tuple of two string for a times between the two values
     """
-    max_time_hour, max_time_minute = max_time.split(':')
-    # Get the first time, which has a max end time of min_hours_dif less tahn max time's hour
-    first_time: str = random_time_range(min_time, f'{int(max_time_hour)-min_hours_dif}:{max_time_minute}')
-    # Get the second time, which starts at first_time
-    second_time = random_time_range(first_time,max_time)
+    # Get the first time, which has a max end time of min_hours_dif less than max time's hour
+    first_time: str = random_time_range(min_time, hour_change(max_time,-min_hours_dif))
+    # Get the second time, which is exactly one hour after start time or starts at first_time
+    second_time = hour_change(first_time,+1) if exact_hour else random_time_range(hour_change(first_time,min_hours_dif),max_time)
     # Convert times to preferred format and then return them as a tuple
     return (time_format(first_time),time_format(second_time))
     
@@ -91,8 +94,8 @@ def generate_mta_availabilities(min_time: str = '09:00', max_time: str = '17:00'
         # Loop through all the randomly chosen days
         available_days: list[str] = random.sample(days_of_the_week,randrange(1,len(days_of_the_week)))
         for day in available_days:
-            # Generate the df entry for this day
-            df.loc[len(df)] = [mta_type if first_entry else '',day,*generate_time_tuple(min_time, max_time)]
+            # Generate the df entry for this day where each availability must be at least 3 hours
+            df.loc[len(df)] = [mta_type if first_entry else '',day,*generate_time_tuple(min_time, max_time, min_hours_dif=3)]
             first_entry = False
 
     # Reformat to datetime
@@ -112,10 +115,10 @@ def generate_student_unavailabilities(students: list[str], min_time: str = '09:0
     for student in students:
         first_entry: bool = True
         # Loop through all the randomly chosen days
-        available_days: list[str] = random.sample(days_of_the_week,randrange(1,len(days_of_the_week)))
-        for day in available_days:
+        unavailable_days: list[str] = random.sample(days_of_the_week,randrange(1,len(days_of_the_week)))
+        for day in unavailable_days:
             # Generate the df entry for this day
-            df.loc[len(df)] = [student if first_entry else '',day,*generate_time_tuple(min_time,max_time)]
+            df.loc[len(df)] = [student if first_entry else '',day,*generate_time_tuple(min_time,max_time,min_hours_dif=1,exact_hour=True)]
             first_entry = False
 
     # Reformat to datetime

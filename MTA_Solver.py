@@ -94,7 +94,6 @@ def read_mtas() -> list[MTA]:
         )
     return mtas
 
-
 def main():
     """
     Solves MTA problems using two different algorithms and runs tests
@@ -108,7 +107,6 @@ def main():
     print("Result found!")
     for item in result: 
         print(item)
-
 
 if __name__ == "__main__":
     main()
