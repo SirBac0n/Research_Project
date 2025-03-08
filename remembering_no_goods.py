@@ -1,12 +1,17 @@
-from MTA_Helper import MTA, Time_Block
+from MTA_Helper import MTA, MTA_Type, Time_Block, Student
 from domain_helper import get_domains
 from datetime import timedelta
+import copy
 
-no_goods: list[list[list[Time_Block]]] = []
+# No-goods consist of a tuple that contain the following:
+#   1. The next_var variable at which the no-goods were found
+#   2. The set of the current MTA_Types
+#   3. The set of the current Students
+no_goods: set[tuple[int, tuple[MTA_Type, ...], tuple[Student, ...]]] = set()
 
 def remembering_no_goods(mtas: list[MTA], domains: list[list[Time_Block]], next_var: int = 0, buffer: int = 5):
     """
-    Runs basic backtracking search on the given MTA problem
+    Runs basic backtracking search with remembering no-goods on the given MTA problem
 
     mtas: the list of MTAs
 
@@ -21,7 +26,18 @@ def remembering_no_goods(mtas: list[MTA], domains: list[list[Time_Block]], next_
     # base case, all variables have been assigned
     if next_var == len(mtas):
         return domains
-    if domains.copy()[:next_var] in no_goods:
+    # Create a set containing the current state of all the MTA Types
+    curr_mta_types: set[MTA_Type] | tuple = {copy.deepcopy(mta.type) for mta in mtas}
+    # Create a set containing the current state of all the students
+    curr_students: set[Student] | tuple = set()
+    for mta in mtas:
+        for student in mta.students:
+            curr_students.add(copy.deepcopy(student))
+    # Convert the sets to hashable tuples
+    curr_mta_types = tuple(curr_mta_types)
+    curr_students = tuple(curr_students)
+    # If we have seen the above sets before, there is no solution here
+    if (next_var,curr_mta_types,curr_students) in no_goods:
         return None
     for value in domains[next_var]:
         consistent = True
@@ -88,5 +104,8 @@ def remembering_no_goods(mtas: list[MTA], domains: list[list[Time_Block]], next_
                     return result
         if not consistent:
             continue
-    no_goods.append(domains.copy()[:next_var])
+    
+    # Add a no-good instance to our set of no-goods
+    no_goods.add((next_var,curr_mta_types,curr_students))
+
     return None

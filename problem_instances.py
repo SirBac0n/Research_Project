@@ -13,9 +13,9 @@ def generate_students(n: int) -> list[str]:
     names: list[str] = []
     # Generate n names
     for _ in range(n):
-        # Make sure name does not contain ','
+        # Make sure name does not contain ',' and is not the same as a previous name
         name: str = ','
-        while ',' in name:
+        while ',' in name or name in names:
             name = fake.name()
         names.append(name)
     return names
