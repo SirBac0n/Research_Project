@@ -1,6 +1,7 @@
 from datetime import datetime
 
 import pandas as pd
+import sys
 
 from backtrack import backtrack
 from remembering_no_goods import remembering_no_goods
@@ -100,7 +101,12 @@ def main():
     """
     mtas = read_mtas()
     domains = get_domains(mtas)
-    result = backtrack(mtas, domains,remember_no_goods=True)
+    no_goods: bool = True if sys.argv[1] == 'r' else False
+    if not no_goods:
+        print("Backtracking...")
+    else:
+        print("Remembering no-goods...")
+    result = backtrack(mtas, domains,remember_no_goods=no_goods)
     if result is None:
         print("No result found")
         return

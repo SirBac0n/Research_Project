@@ -9,20 +9,22 @@ def main():
     # Always make 10 students
     num_students = 10
     # Start with 1 MTA and go to 20 MTA's
-    for num_mtas in range(1,21):
+    for num_mtas in range(1,16):
         print(f"{num_mtas} MTA's")
-        num_runs = 5
+        num_runs = 15
         backtrack_time: float = 0.0
         backtrack_successes: int = 0
         remembering_no_goods_time: float = 0.0
         remembering_no_goods_successes: int = 0
-        for _ in range(num_runs):
+        for i in range(num_runs):
             generate_problem_instances(num_students,num_mtas)
+
+            # Make sure the Excel spreadsheets have time to update
+            #time.sleep(.1)
+
+            # Load MTA's and domains
             mtas = read_mtas()
             domains = get_domains(mtas)
-            # Make sure the Excel spreadsheets have time to update
-            time.sleep(.5)
-
             # Solve and time just using backtracking
             start_time = time.time()
             result = backtrack(mtas,domains,remember_no_goods=False)
@@ -31,6 +33,9 @@ def main():
             backtrack_time += (end_time - start_time)
             backtrack_successes += 1 if result else 0
 
+            # Load MTA's and domains
+            mtas = read_mtas()
+            domains = get_domains(mtas)
             # Solve and time using remembering no-goods
             start_time = time.time()
             result = backtrack(mtas,domains,remember_no_goods=True)
@@ -38,6 +43,9 @@ def main():
             # Increment if success and add to time
             remembering_no_goods_time += (end_time - start_time)
             remembering_no_goods_successes += 1 if result else 0
+
+            if backtrack_successes != remembering_no_goods_successes:
+                raise ValueError("Successes should be the same!")
 
         # Get the average time
         backtrack_time = backtrack_time / num_runs

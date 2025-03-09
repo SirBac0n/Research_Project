@@ -30,7 +30,7 @@ def backtrack(mtas: list[MTA], domains: list[list[Time_Block]], next_var: int = 
     # If remembering no-goods...
     if remember_no_goods:
         # Create a set containing the current state of all the MTA Types
-        curr_mta_types = {copy.deepcopy(mta.type) for mta in mtas}
+        curr_mta_types = {MTA_Type(mta.type.name,copy.deepcopy(mta.type.times)) for mta in mtas}
         # Create a set containing the current state of all the students
         curr_students = set()
         for mta in mtas:
