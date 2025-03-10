@@ -1,8 +1,3 @@
-import random
-from faker import Faker
-from random import randrange
-import pandas as pd
-import sys
 
 """ Authors: Keith Graybill
     Course:  COMP 445
@@ -10,6 +5,12 @@ import sys
     Description: file to create problem instances
     Run with: ./problem_instances
 """
+
+import random
+from faker import Faker
+from random import randrange
+import pandas as pd
+import sys
 
 # Create initialized global list variables
 mta_types: list[str] = ['Preaching','Apologetics','Music','Puppetry','Bible Teaching','Inspirational Writing',
