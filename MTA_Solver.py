@@ -140,7 +140,7 @@ def main():
     if result:
         print("\nResult found:")
         for i in range(len(result)):
-            print(f"{mtas[i].type.name} = {result[i]}")
+            print(f"{mtas[i]} = {result[i]}")
     else:
         print("\nNo result found")
 
