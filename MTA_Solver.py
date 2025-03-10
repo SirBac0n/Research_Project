@@ -108,7 +108,7 @@ def main():
     # Get the buffer period for between MTAs
     buffer = -1
     while True:
-        # Keep looping till we get a valid integer that is greater than 0
+        # Keep looping till we get a valid integer that is greater than or equal to 0
         try:
             buffer = int(input("Enter the buffer period for minutes between MTAs (will be converted to divisible by five): "))
             if buffer >= 0: break
