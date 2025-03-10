@@ -5,6 +5,7 @@ from domain_helper import get_domains
 from problem_instances import generate_problem_instances
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.ticker import PercentFormatter
 
 
 def main():
@@ -67,8 +68,8 @@ def main():
     n = df.loc[df["Algorithm"] == "Remembering No Goods"]
     b_avgs = b.groupby("Num_MTAs")["Runtime"].mean()
     n_avgs = n.groupby("Num_MTAs")["Runtime"].mean()
-    b_percent = b.loc[b["Result"] == 1]
-    n_percent = n.loc[n["Result"] == 1]
+    b_percent = b.groupby("Num_MTAs")['Result'].mean()
+    n_percent = n.groupby("Num_MTAs")['Result'].mean()
     fig1, ax1 = plt.subplots(figsize=(8, 6))
     b.plot(kind="scatter", x="Num_MTAs", y="Runtime", ax=ax1)
     b_avgs.plot(kind="line", x="Num_MTAs", y="Runtime", ax=ax1)
@@ -79,6 +80,9 @@ def main():
     b_avgs.plot(kind="line", x="Num_MTAs", y="Runtime", ax=ax3)
     n_avgs.plot(kind="line", x="Num_MTAs", y="Runtime", ax=ax3)
     fig4, ax4 = plt.subplots(figsize=(8, 6))
+    b_percent.plot(kind="line", x="Num_MTAs", y="Result", ax=ax4)
+    fig5, ax5 = plt.subplots(figsize=(8, 6))
+    n_percent.plot(kind="line", x="Num_MTAs", y="Result", ax=ax5)
 
     plt.show()
 
