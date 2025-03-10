@@ -6,8 +6,8 @@ from datetime import timedelta
 
 no_goods: set[tuple[int, tuple[MTA_Type, ...], tuple[Student, ...]]] = set()
 
-def backtrack(mtas: list[MTA], domains: list[list[Time_Block]], next_var: int = 0, buffer: int = 5, 
-              remember_no_goods: bool = False) -> list[list[Time_Block]] | None:
+def backtrack(mtas: list[MTA], domains: list[Time_Block], next_var: int = 0, buffer: int = 5, 
+              remember_no_goods: bool = False) -> list[Time_Block] | None:
     """
     Runs basic backtracking search on the given MTA problem
 

@@ -4,7 +4,6 @@ import pandas as pd
 import sys
 
 from backtrack import backtrack
-from remembering_no_goods import remembering_no_goods
 from domain_helper import get_domains
 from MTA_Helper import MTA, MTA_Type, Student, Time_Block
 
@@ -99,7 +98,7 @@ def main():
     """
     Solves MTA problems using two different algorithms and runs tests
     """
-    mtas = read_mtas()
+    """mtas = read_mtas()
     domains = get_domains(mtas)
     no_goods: bool = True if sys.argv[1] == 'r' else False
     if not no_goods:
@@ -112,7 +111,27 @@ def main():
         return
     print("Result found!")
     for item in result: 
-        print(item)
+        print(item)"""
+    mtas = read_mtas()
+    domains = get_domains(mtas)
+    algorithm = input("Enter 'b' for backtracking search or 'n' for remembering no goods: ").lower()
+    while algorithm != "b" and algorithm != "n":
+        algorithm = input("Invalid input, please enter 'b' or 'n': ")
+    try:
+        buffer = int(input("Enter the buffer period between MTAs: "))
+    except:
+        while not isinstance(buffer, int):
+            buffer = int(input("Invalid input, please enter a positive integer: "))
+    while buffer < 0:
+        buffer = int(input("Invalid input, please enter a positive integer: "))
+    if algorithm == "b":
+        result = backtrack(mtas, domains, buffer=buffer)
+        for i in range(len(result)):
+            print(f"{mtas[i].type.name} = {result[i]}")
+    else:
+        result = backtrack(mtas, domains, buffer=buffer, remember_no_goods=True)
+        for i in range(len(result)):
+            print(f"{mtas[i].type.name} = {result[i]}")
 
 if __name__ == "__main__":
     main()
