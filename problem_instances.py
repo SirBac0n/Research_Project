@@ -221,6 +221,12 @@ def generate_mtas(students: list[str], n: int, max_students_per_mta: int = 2, mt
     return df
 
 def generate_problem_instances(n_students: int, n_mtas: int):
+    """Creates problem instances
+    
+    n_students: number of students to generate
+
+    n_mtas: number of MTAs to generate 
+    """
     # Generate students
     students: list[str] = generate_students(n_students)
     # Generate student unavailabilities
