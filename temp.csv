@@ -1,0 +1,451 @@
+,Algorithm,Num_MTAs,Runtime,Result
+0,Backtracking,1,0.0,1
+1,Remembering No Goods,1,0.0,1
+2,Backtracking,1,0.0,1
+3,Remembering No Goods,1,0.0,1
+4,Backtracking,1,0.0,1
+5,Remembering No Goods,1,0.0,1
+6,Backtracking,1,0.0,1
+7,Remembering No Goods,1,0.0,1
+8,Backtracking,1,0.0,1
+9,Remembering No Goods,1,0.0,1
+10,Backtracking,1,0.0,1
+11,Remembering No Goods,1,0.0,1
+12,Backtracking,1,0.0,1
+13,Remembering No Goods,1,0.0,1
+14,Backtracking,1,0.0,1
+15,Remembering No Goods,1,0.0,1
+16,Backtracking,1,0.0,1
+17,Remembering No Goods,1,0.0,1
+18,Backtracking,1,0.0,1
+19,Remembering No Goods,1,0.0,1
+20,Backtracking,1,0.0,1
+21,Remembering No Goods,1,0.0,1
+22,Backtracking,1,0.0,1
+23,Remembering No Goods,1,0.0,1
+24,Backtracking,1,0.0,1
+25,Remembering No Goods,1,0.0,1
+26,Backtracking,1,0.0,1
+27,Remembering No Goods,1,8.027315139770508,1
+28,Backtracking,1,0.0,1
+29,Remembering No Goods,1,0.0,1
+30,Backtracking,2,15.667200088500977,1
+31,Remembering No Goods,2,0.0,1
+32,Backtracking,2,0.0,1
+33,Remembering No Goods,2,4.652500152587891,1
+34,Backtracking,2,0.0,1
+35,Remembering No Goods,2,0.0,1
+36,Backtracking,2,0.0,1
+37,Remembering No Goods,2,0.0,1
+38,Backtracking,2,0.0,1
+39,Remembering No Goods,2,0.0,1
+40,Backtracking,2,0.0,1
+41,Remembering No Goods,2,0.8802413940429688,1
+42,Backtracking,2,0.0,1
+43,Remembering No Goods,2,0.0,1
+44,Backtracking,2,0.0,1
+45,Remembering No Goods,2,0.0,1
+46,Backtracking,2,0.0,1
+47,Remembering No Goods,2,0.0,1
+48,Backtracking,2,0.0,1
+49,Remembering No Goods,2,0.0,1
+50,Backtracking,2,0.0,1
+51,Remembering No Goods,2,0.0,1
+52,Backtracking,2,0.0,1
+53,Remembering No Goods,2,15.71798324584961,1
+54,Backtracking,2,0.0,1
+55,Remembering No Goods,2,0.0,1
+56,Backtracking,2,0.0,1
+57,Remembering No Goods,2,0.0,1
+58,Backtracking,2,0.0,1
+59,Remembering No Goods,2,0.0,1
+60,Backtracking,3,0.0,1
+61,Remembering No Goods,3,0.0,1
+62,Backtracking,3,0.0,1
+63,Remembering No Goods,3,0.0,1
+64,Backtracking,3,0.0,1
+65,Remembering No Goods,3,0.0,1
+66,Backtracking,3,0.0,1
+67,Remembering No Goods,3,0.0,1
+68,Backtracking,3,0.5929470062255859,1
+69,Remembering No Goods,3,0.0,1
+70,Backtracking,3,0.0,1
+71,Remembering No Goods,3,0.0,1
+72,Backtracking,3,0.0,1
+73,Remembering No Goods,3,0.0,1
+74,Backtracking,3,0.0,1
+75,Remembering No Goods,3,0.0,1
+76,Backtracking,3,0.0,1
+77,Remembering No Goods,3,0.0,1
+78,Backtracking,3,0.0,1
+79,Remembering No Goods,3,0.0,1
+80,Backtracking,3,0.0,1
+81,Remembering No Goods,3,0.0,1
+82,Backtracking,3,1.2662410736083984,1
+83,Remembering No Goods,3,2.9611587524414062,1
+84,Backtracking,3,0.0,1
+85,Remembering No Goods,3,1.1377334594726562,1
+86,Backtracking,3,0.0,1
+87,Remembering No Goods,3,0.0,1
+88,Backtracking,3,0.0,1
+89,Remembering No Goods,3,0.07128715515136719,1
+90,Backtracking,4,0.0,1
+91,Remembering No Goods,4,2.938985824584961,1
+92,Backtracking,4,0.0,1
+93,Remembering No Goods,4,0.0,1
+94,Backtracking,4,0.0,1
+95,Remembering No Goods,4,0.0,1
+96,Backtracking,4,0.0,1
+97,Remembering No Goods,4,8.306503295898438,1
+98,Backtracking,4,0.0,1
+99,Remembering No Goods,4,0.0,1
+100,Backtracking,4,0.0,0
+101,Remembering No Goods,4,1.8723011016845703,0
+102,Backtracking,4,0.0,1
+103,Remembering No Goods,4,0.0,1
+104,Backtracking,4,0.0,1
+105,Remembering No Goods,4,0.0,1
+106,Backtracking,4,0.0,0
+107,Remembering No Goods,4,0.0,0
+108,Backtracking,4,0.0,1
+109,Remembering No Goods,4,0.0,1
+110,Backtracking,4,0.0,1
+111,Remembering No Goods,4,8.02922248840332,1
+112,Backtracking,4,0.0,1
+113,Remembering No Goods,4,0.0,1
+114,Backtracking,4,0.0,1
+115,Remembering No Goods,4,0.0,1
+116,Backtracking,4,0.0,1
+117,Remembering No Goods,4,0.0,1
+118,Backtracking,4,0.0,0
+119,Remembering No Goods,4,0.0,0
+120,Backtracking,5,0.0,0
+121,Remembering No Goods,5,0.0,0
+122,Backtracking,5,1.1668205261230469,1
+123,Remembering No Goods,5,0.0,1
+124,Backtracking,5,0.0,1
+125,Remembering No Goods,5,0.0,1
+126,Backtracking,5,0.0,1
+127,Remembering No Goods,5,0.0,1
+128,Backtracking,5,2.1102428436279297,0
+129,Remembering No Goods,5,0.0,0
+130,Backtracking,5,0.0,1
+131,Remembering No Goods,5,0.0,1
+132,Backtracking,5,0.0,0
+133,Remembering No Goods,5,0.0,0
+134,Backtracking,5,0.0,1
+135,Remembering No Goods,5,0.0,1
+136,Backtracking,5,0.0,1
+137,Remembering No Goods,5,0.0,1
+138,Backtracking,5,0.0,1
+139,Remembering No Goods,5,0.0,1
+140,Backtracking,5,0.0,1
+141,Remembering No Goods,5,0.0,1
+142,Backtracking,5,0.0,0
+143,Remembering No Goods,5,0.0,0
+144,Backtracking,5,5.281925201416016,1
+145,Remembering No Goods,5,0.0,1
+146,Backtracking,5,8.013725280761719,1
+147,Remembering No Goods,5,2.192258834838867,1
+148,Backtracking,5,0.0,1
+149,Remembering No Goods,5,0.0,1
+150,Backtracking,6,4.563093185424805,0
+151,Remembering No Goods,6,6.510257720947266,0
+152,Backtracking,6,0.0,1
+153,Remembering No Goods,6,0.0,1
+154,Backtracking,6,0.0,1
+155,Remembering No Goods,6,0.0,1
+156,Backtracking,6,0.0,0
+157,Remembering No Goods,6,0.0,0
+158,Backtracking,6,0.5786418914794922,1
+159,Remembering No Goods,6,0.0,1
+160,Backtracking,6,8.627891540527344,1
+161,Remembering No Goods,6,0.0,1
+162,Backtracking,6,0.0,0
+163,Remembering No Goods,6,0.0,0
+164,Backtracking,6,0.0,1
+165,Remembering No Goods,6,10.889291763305664,1
+166,Backtracking,6,0.0,1
+167,Remembering No Goods,6,0.0,1
+168,Backtracking,6,2.572774887084961,1
+169,Remembering No Goods,6,0.0,1
+170,Backtracking,6,3.528594970703125,1
+171,Remembering No Goods,6,0.0,1
+172,Backtracking,6,0.0,1
+173,Remembering No Goods,6,0.0,1
+174,Backtracking,6,15.725374221801758,1
+175,Remembering No Goods,6,0.0,1
+176,Backtracking,6,0.0,0
+177,Remembering No Goods,6,2.0563602447509766,0
+178,Backtracking,6,0.0,0
+179,Remembering No Goods,6,0.0,0
+180,Backtracking,7,0.0,0
+181,Remembering No Goods,7,2.003908157348633,0
+182,Backtracking,7,0.0,1
+183,Remembering No Goods,7,0.0,1
+184,Backtracking,7,0.0,1
+185,Remembering No Goods,7,15.626907348632812,1
+186,Backtracking,7,0.0,1
+187,Remembering No Goods,7,0.0,1
+188,Backtracking,7,0.0,1
+189,Remembering No Goods,7,0.0,1
+190,Backtracking,7,0.0,0
+191,Remembering No Goods,7,16.45350456237793,0
+192,Backtracking,7,0.0,1
+193,Remembering No Goods,7,18.42474937438965,1
+194,Backtracking,7,15.770435333251953,1
+195,Remembering No Goods,7,0.0,1
+196,Backtracking,7,0.0,0
+197,Remembering No Goods,7,0.0,0
+198,Backtracking,7,0.0,1
+199,Remembering No Goods,7,0.0,1
+200,Backtracking,7,0.0,1
+201,Remembering No Goods,7,8.095264434814453,1
+202,Backtracking,7,0.0,1
+203,Remembering No Goods,7,0.0,1
+204,Backtracking,7,0.3724098205566406,0
+205,Remembering No Goods,7,16.465425491333008,0
+206,Backtracking,7,0.0,0
+207,Remembering No Goods,7,0.0,0
+208,Backtracking,7,0.0,1
+209,Remembering No Goods,7,0.0,1
+210,Backtracking,8,0.0,0
+211,Remembering No Goods,8,0.0,0
+212,Backtracking,8,0.0,1
+213,Remembering No Goods,8,16.37721061706543,1
+214,Backtracking,8,0.0,0
+215,Remembering No Goods,8,0.0,0
+216,Backtracking,8,1.3666152954101562,1
+217,Remembering No Goods,8,15.669584274291992,1
+218,Backtracking,8,0.0,1
+219,Remembering No Goods,8,8.117437362670898,1
+220,Backtracking,8,15.664339065551758,1
+221,Remembering No Goods,8,0.0,1
+222,Backtracking,8,0.0,0
+223,Remembering No Goods,8,2.1164417266845703,0
+224,Backtracking,8,0.0,1
+225,Remembering No Goods,8,0.0,1
+226,Backtracking,8,0.0,0
+227,Remembering No Goods,8,0.0,0
+228,Backtracking,8,0.0,0
+229,Remembering No Goods,8,15.708208084106445,0
+230,Backtracking,8,2.2199153900146484,1
+231,Remembering No Goods,8,0.0,1
+232,Backtracking,8,0.0,0
+233,Remembering No Goods,8,0.0,0
+234,Backtracking,8,0.0,1
+235,Remembering No Goods,8,9.34290885925293,1
+236,Backtracking,8,15.708684921264648,1
+237,Remembering No Goods,8,0.0,1
+238,Backtracking,8,0.0,0
+239,Remembering No Goods,8,8.030176162719727,0
+240,Backtracking,9,0.0,0
+241,Remembering No Goods,9,9.580850601196289,0
+242,Backtracking,9,8.207321166992188,1
+243,Remembering No Goods,9,18.822431564331055,1
+244,Backtracking,9,0.0,0
+245,Remembering No Goods,9,15.622377395629883,0
+246,Backtracking,9,8.032560348510742,1
+247,Remembering No Goods,9,0.0,1
+248,Backtracking,9,0.0,1
+249,Remembering No Goods,9,7.96818733215332,1
+250,Backtracking,9,15.621185302734375,1
+251,Remembering No Goods,9,5.090475082397461,1
+252,Backtracking,9,0.0,1
+253,Remembering No Goods,9,0.0,1
+254,Backtracking,9,0.0,0
+255,Remembering No Goods,9,0.0,0
+256,Backtracking,9,0.0,0
+257,Remembering No Goods,9,16.429424285888672,0
+258,Backtracking,9,0.0,0
+259,Remembering No Goods,9,15.62356948852539,0
+260,Backtracking,9,19.185781478881836,1
+261,Remembering No Goods,9,15.627145767211914,1
+262,Backtracking,9,0.0,0
+263,Remembering No Goods,9,15.913248062133789,0
+264,Backtracking,9,8.013725280761719,0
+265,Remembering No Goods,9,0.0,0
+266,Backtracking,9,5.27191162109375,0
+267,Remembering No Goods,9,0.0,0
+268,Backtracking,9,0.0,0
+269,Remembering No Goods,9,16.86835289001465,0
+270,Backtracking,10,15.804529190063477,0
+271,Remembering No Goods,10,5.667686462402344,0
+272,Backtracking,10,0.0,0
+273,Remembering No Goods,10,7.325410842895508,0
+274,Backtracking,10,20.7669734954834,1
+275,Remembering No Goods,10,0.0,1
+276,Backtracking,10,15.623331069946289,0
+277,Remembering No Goods,10,0.0,0
+278,Backtracking,10,0.0,1
+279,Remembering No Goods,10,5.055427551269531,1
+280,Backtracking,10,1.0123252868652344,0
+281,Remembering No Goods,10,0.0,0
+282,Backtracking,10,0.0,0
+283,Remembering No Goods,10,0.34427642822265625,0
+284,Backtracking,10,5.038022994995117,0
+285,Remembering No Goods,10,0.0,0
+286,Backtracking,10,0.0,0
+287,Remembering No Goods,10,15.507936477661133,0
+288,Backtracking,10,0.0,0
+289,Remembering No Goods,10,0.0,0
+290,Backtracking,10,15.64788818359375,0
+291,Remembering No Goods,10,15.626192092895508,0
+292,Backtracking,10,19.09661293029785,1
+293,Remembering No Goods,10,17.536401748657227,1
+294,Backtracking,10,0.0,0
+295,Remembering No Goods,10,0.0,0
+296,Backtracking,10,0.0,0
+297,Remembering No Goods,10,15.810966491699219,0
+298,Backtracking,10,0.0,1
+299,Remembering No Goods,10,0.0,1
+300,Backtracking,11,0.0,0
+301,Remembering No Goods,11,7.347583770751953,0
+302,Backtracking,11,16.11948013305664,0
+303,Remembering No Goods,11,6.794452667236328,0
+304,Backtracking,11,0.0,0
+305,Remembering No Goods,11,15.67983627319336,0
+306,Backtracking,11,15.643835067749023,0
+307,Remembering No Goods,11,0.0,0
+308,Backtracking,11,15.609264373779297,0
+309,Remembering No Goods,11,7.999420166015625,0
+310,Backtracking,11,7.027149200439453,0
+311,Remembering No Goods,11,0.0,0
+312,Backtracking,11,0.0,0
+313,Remembering No Goods,11,8.335113525390625,0
+314,Backtracking,11,0.0,0
+315,Remembering No Goods,11,0.0,0
+316,Backtracking,11,17.260313034057617,0
+317,Remembering No Goods,11,15.787124633789062,0
+318,Backtracking,11,7.999420166015625,1
+319,Remembering No Goods,11,15.635967254638672,1
+320,Backtracking,11,0.0,0
+321,Remembering No Goods,11,1.6541481018066406,0
+322,Backtracking,11,0.0,0
+323,Remembering No Goods,11,12.555837631225586,0
+324,Backtracking,11,0.0,0
+325,Remembering No Goods,11,0.0,0
+326,Backtracking,11,15.66004753112793,0
+327,Remembering No Goods,11,16.002893447875977,0
+328,Backtracking,11,0.0,0
+329,Remembering No Goods,11,0.0,0
+330,Backtracking,12,0.0,0
+331,Remembering No Goods,12,0.0,0
+332,Backtracking,12,0.0,0
+333,Remembering No Goods,12,0.0,0
+334,Backtracking,12,15.697240829467773,0
+335,Remembering No Goods,12,13.555765151977539,0
+336,Backtracking,12,14.182329177856445,1
+337,Remembering No Goods,12,15.850067138671875,1
+338,Backtracking,12,0.0,1
+339,Remembering No Goods,12,15.614032745361328,1
+340,Backtracking,12,16.727447509765625,0
+341,Remembering No Goods,12,8.011817932128906,0
+342,Backtracking,12,0.0,0
+343,Remembering No Goods,12,0.0,0
+344,Backtracking,12,0.0,0
+345,Remembering No Goods,12,8.18943977355957,0
+346,Backtracking,12,0.0,0
+347,Remembering No Goods,12,0.0,0
+348,Backtracking,12,0.0,0
+349,Remembering No Goods,12,0.0,0
+350,Backtracking,12,15.772581100463867,0
+351,Remembering No Goods,12,15.622854232788086,0
+352,Backtracking,12,8.023500442504883,0
+353,Remembering No Goods,12,16.674280166625977,0
+354,Backtracking,12,0.0,0
+355,Remembering No Goods,12,15.625953674316406,0
+356,Backtracking,12,15.635251998901367,1
+357,Remembering No Goods,12,70.53160667419434,1
+358,Backtracking,12,15.626192092895508,1
+359,Remembering No Goods,12,0.0,1
+360,Backtracking,13,8.001565933227539,0
+361,Remembering No Goods,13,15.655517578125,0
+362,Backtracking,13,1.1820793151855469,0
+363,Remembering No Goods,13,0.0,0
+364,Backtracking,13,7.820367813110352,0
+365,Remembering No Goods,13,7.122278213500977,0
+366,Backtracking,13,13.682842254638672,1
+367,Remembering No Goods,13,16.727685928344727,1
+368,Backtracking,13,9.170770645141602,1
+369,Remembering No Goods,13,15.781164169311523,1
+370,Backtracking,13,0.0,0
+371,Remembering No Goods,13,15.627145767211914,0
+372,Backtracking,13,0.0,1
+373,Remembering No Goods,13,14.589309692382812,1
+374,Backtracking,13,0.0,0
+375,Remembering No Goods,13,15.645027160644531,0
+376,Backtracking,13,4.205226898193359,1
+377,Remembering No Goods,13,15.76685905456543,1
+378,Backtracking,13,0.0,0
+379,Remembering No Goods,13,16.536712646484375,0
+380,Backtracking,13,0.0,0
+381,Remembering No Goods,13,15.641927719116211,0
+382,Backtracking,13,8.087635040283203,0
+383,Remembering No Goods,13,8.142709732055664,0
+384,Backtracking,13,0.0,0
+385,Remembering No Goods,13,15.617847442626953,0
+386,Backtracking,13,6.40416145324707,0
+387,Remembering No Goods,13,9.084701538085938,0
+388,Backtracking,13,23.120403289794922,0
+389,Remembering No Goods,13,16.56794548034668,0
+390,Backtracking,14,6.024599075317383,1
+391,Remembering No Goods,14,8.128643035888672,1
+392,Backtracking,14,15.777826309204102,0
+393,Remembering No Goods,14,16.719341278076172,0
+394,Backtracking,14,3.5653114318847656,0
+395,Remembering No Goods,14,8.57400894165039,0
+396,Backtracking,14,0.0,0
+397,Remembering No Goods,14,20.711898803710938,0
+398,Backtracking,14,0.0,0
+399,Remembering No Goods,14,15.729188919067383,0
+400,Backtracking,14,13.089656829833984,0
+401,Remembering No Goods,14,8.002519607543945,0
+402,Backtracking,14,0.0,0
+403,Remembering No Goods,14,4.559755325317383,0
+404,Backtracking,14,15.623092651367188,0
+405,Remembering No Goods,14,16.49165153503418,0
+406,Backtracking,14,15.732049942016602,0
+407,Remembering No Goods,14,0.0,0
+408,Backtracking,14,21.026611328125,0
+409,Remembering No Goods,14,24.91927146911621,0
+410,Backtracking,14,0.0,0
+411,Remembering No Goods,14,0.0,0
+412,Backtracking,14,12.044191360473633,0
+413,Remembering No Goods,14,15.97285270690918,0
+414,Backtracking,14,0.0,0
+415,Remembering No Goods,14,0.0,0
+416,Backtracking,14,8.116483688354492,0
+417,Remembering No Goods,14,15.506744384765625,0
+418,Backtracking,14,0.0,0
+419,Remembering No Goods,14,15.7012939453125,0
+420,Backtracking,15,15.651702880859375,0
+421,Remembering No Goods,15,10.342836380004883,0
+422,Backtracking,15,1.3935565948486328,0
+423,Remembering No Goods,15,18.571853637695312,0
+424,Backtracking,15,25.371551513671875,1
+425,Remembering No Goods,15,16.210079193115234,1
+426,Backtracking,15,0.0,0
+427,Remembering No Goods,15,15.693426132202148,0
+428,Backtracking,15,16.92962646484375,0
+429,Remembering No Goods,15,9.901762008666992,0
+430,Backtracking,15,19.989728927612305,0
+431,Remembering No Goods,15,22.41969108581543,0
+432,Backtracking,15,15.969276428222656,0
+433,Remembering No Goods,15,16.179561614990234,0
+434,Backtracking,15,10.265350341796875,0
+435,Remembering No Goods,15,16.388416290283203,0
+436,Backtracking,15,24.31464195251465,1
+437,Remembering No Goods,15,15.480995178222656,1
+438,Backtracking,15,0.0,0
+439,Remembering No Goods,15,22.14217185974121,0
+440,Backtracking,15,83.1911563873291,0
+441,Remembering No Goods,15,13.263463973999023,0
+442,Backtracking,15,12.628793716430664,0
+443,Remembering No Goods,15,16.65520668029785,0
+444,Backtracking,15,18.921613693237305,0
+445,Remembering No Goods,15,15.619754791259766,0
+446,Backtracking,15,5.522251129150391,0
+447,Remembering No Goods,15,7.833003997802734,0
+448,Backtracking,15,0.0,0
+449,Remembering No Goods,15,5.530357360839844,0
