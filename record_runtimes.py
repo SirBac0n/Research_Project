@@ -63,9 +63,23 @@ def main():
 """
     #df.to_csv("temp.xlsx")
     df = pd.read_csv("temp.csv")
-    fig, ax = plt.subplots(figsize=(8, 6))
-    df.plot(kind="scatter", x="Num_MTAs", y="Runtime", ax=ax)
-    df.plot(kind="line", x="Num_MTAs", y="Runtime", ax=ax)
+    b = df.loc[df["Algorithm"] == "Backtracking"]
+    n = df.loc[df["Algorithm"] == "Remembering No Goods"]
+    b_avgs = b.groupby("Num_MTAs")["Runtime"].mean()
+    n_avgs = n.groupby("Num_MTAs")["Runtime"].mean()
+    b_percent = b.loc[b["Result"] == 1]
+    n_percent = n.loc[n["Result"] == 1]
+    fig1, ax1 = plt.subplots(figsize=(8, 6))
+    b.plot(kind="scatter", x="Num_MTAs", y="Runtime", ax=ax1)
+    b_avgs.plot(kind="line", x="Num_MTAs", y="Runtime", ax=ax1)
+    fig2, ax2 = plt.subplots(figsize=(8, 6))
+    n.plot(kind="scatter", x="Num_MTAs", y="Runtime", ax=ax2)
+    n_avgs.plot(kind="line", x="Num_MTAs", y="Runtime", ax=ax2)
+    fig3, ax3 = plt.subplots(figsize=(8, 6))
+    b_avgs.plot(kind="line", x="Num_MTAs", y="Runtime", ax=ax3)
+    n_avgs.plot(kind="line", x="Num_MTAs", y="Runtime", ax=ax3)
+    fig4, ax4 = plt.subplots(figsize=(8, 6))
+
     plt.show()
 
 if __name__ == '__main__':
