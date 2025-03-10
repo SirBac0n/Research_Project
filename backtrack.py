@@ -43,7 +43,7 @@ def backtrack(mtas: list[MTA], domains: list[Time_Block], next_var: int = 0, buf
         if (next_var,curr_mta_types,curr_students) in no_goods:
             return None
 
-    for value in domains[next_var]:
+    for value in domains[next_var]: #type: ignore
         consistent = True
         # check if the value is in the available time slots for that MTA type
         for time in mtas[next_var].type.times:
@@ -102,7 +102,7 @@ def backtrack(mtas: list[MTA], domains: list[Time_Block], next_var: int = 0, buf
                 # assign value
                 new_domains.append(value) #type: ignore
                 # generate new domains after assignment
-                new_domains.extend(get_domains(new_mtas, next_var + 1))
+                new_domains.extend(get_domains(new_mtas, next_var + 1)) #type: ignore
                 result = backtrack(new_mtas, new_domains, next_var + 1, buffer)
                 if result:
                     return result

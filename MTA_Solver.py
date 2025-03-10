@@ -120,7 +120,7 @@ def main():
     try:
         buffer = int(input("Enter the buffer period between MTAs: "))
     except:
-        while not isinstance(buffer, int):
+        while not isinstance(buffer, int): 
             buffer = int(input("Invalid input, please enter a positive integer: "))
     while buffer < 0:
         buffer = int(input("Invalid input, please enter a positive integer: "))
