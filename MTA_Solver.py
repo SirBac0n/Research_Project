@@ -125,12 +125,15 @@ def main():
     remainder = buffer % 5
     buffer = buffer + (5-remainder) if remainder > 2 else buffer - remainder
     # Get whether the user wants a verbose run or not
-    verbosity = 0
+    verbosity = -1
     try:
         verbosity: int = int(input("What level of verbosity would you like (0/1/2)? "))
     except:
         while verbosity not in [0, 1, 2]:
-            verbosity = int(input("Invalid input, what level of verbosity would you like (0/1/2)? "))
+            try:
+                verbosity = int(input("Invalid input, what level of verbosity would you like (0/1/2)? "))
+            except:
+                pass
     # Run search
     result = backtrack(mtas, domains, buffer=buffer, remember_no_goods=(algorithm == 'n'), verbosity=verbosity)
     # Print results
