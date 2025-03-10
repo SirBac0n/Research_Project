@@ -131,8 +131,9 @@ def main():
     while buffer < 0:
         buffer = int(input("Invalid input, please enter a positive integer: "))
     result = backtrack(mtas, domains, buffer=buffer, remember_no_goods=(algorithm == 'n'), verbose=is_verbose)
-    for i in range(len(result)):
-        print(f"{mtas[i].type.name} = {result[i]}")
+    if result:
+        for i in range(len(result)):
+            print(f"{mtas[i].type.name} = {result[i]}")
 
 if __name__ == "__main__":
     main()

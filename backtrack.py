@@ -6,8 +6,8 @@ from datetime import timedelta
 
 no_goods: set[tuple[int, tuple[MTA_Type, ...], tuple[Student, ...]]] = set()
 
-def backtrack(mtas: list[MTA], domains: list[Time_Block], next_var: int = 0, buffer: int = 5, 
-              remember_no_goods: bool = False, verbose: bool = False) -> list[Time_Block] | None:
+def backtrack(mtas: list[MTA], domains: list[list[Time_Block]], next_var: int = 0, buffer: int = 5, 
+              remember_no_goods: bool = False, verbose: bool = False) -> list[list[Time_Block]] | None:
     """
     Runs basic backtracking search on the given MTA problem
 
@@ -18,6 +18,10 @@ def backtrack(mtas: list[MTA], domains: list[Time_Block], next_var: int = 0, buf
     next_var: the index of the next variable to assign
 
     buffer: the amount of time a student needs between scheduled MTAs
+
+    remember_no_goods: a boolean specifying whether to utilize remembering no goods or not
+
+    verbose: a boolean specifying how much of the process is printed to the terminal for debugging
 
     return: a list representing the time slot assignment for each MTA
     """
@@ -46,7 +50,7 @@ def backtrack(mtas: list[MTA], domains: list[Time_Block], next_var: int = 0, buf
                 print(f"No solution found for {mtas[next_var]}")
             return None
 
-    for value in domains[next_var]: #type: ignore
+    for value in domains[next_var]:
         if verbose:
             print(f"Assigning {mtas[next_var]} at time {value.start_time.time()}")
         consistent = True
@@ -76,6 +80,7 @@ def backtrack(mtas: list[MTA], domains: list[Time_Block], next_var: int = 0, buf
                         break
                 if not consistent:
                     break
+                # create new mtas
                 new_mtas = mtas.copy()
                 new_times = new_mtas[next_var].type.times.copy()
                 new_time = new_times[new_times.index(time)]
