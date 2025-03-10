@@ -114,7 +114,7 @@ def main():
             if buffer >= 0: break
         except:
             pass
-        print("Invalid input, please enter a positive integer. ",end='')
+        print("Invalid input, please enter a non-negative integer. ",end='')
     # Make sure it is divisible by five
     remainder = buffer % 5
     buffer = buffer + (5-remainder) if remainder > 2 else buffer - remainder
