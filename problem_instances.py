@@ -3,7 +3,7 @@
     Course:  COMP 445
     Date:    10 March 2025
     Description: file to create problem instances
-    Run with: ./problem_instances
+    Run with: ./problem_instances.py
 """
 
 import random

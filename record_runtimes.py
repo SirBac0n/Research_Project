@@ -1,14 +1,23 @@
+
+""" Authors: Keith Graybill (primary code logic and help with plotting) 
+        and Seth Harmon (plot creation and DataFrame manipulation)
+    Course:  COMP 445
+    Date:    10 March 2025
+    Description: file to record runtimes
+    Run with: ./record_runtimes.py
+"""
+
 import time
+import pandas as pd
+import matplotlib.pyplot as plt
 from backtrack import backtrack
 from MTA_Solver import read_mtas
 from domain_helper import get_domains
 from problem_instances import generate_problem_instances
-import pandas as pd
-import matplotlib.pyplot as plt
 from matplotlib.ticker import PercentFormatter
 
-
 def main():
+    # Get user input
     result = ""
     result = input("Do you want to create new runtime record ('yes'/'no) ").strip().lower() 
     while result not in ['yes','no']:
@@ -26,10 +35,8 @@ def main():
             remembering_no_goods_time: float = 0.0
             remembering_no_goods_successes: int = 0
             for i in range(num_runs):
+                # Generate the problem instances
                 generate_problem_instances(num_students,num_mtas)
-
-                # Make sure the Excel spreadsheets have time to update
-                #time.sleep(.1)
 
                 # Load MTAs and domains
                 mtas = read_mtas()
@@ -64,6 +71,7 @@ def main():
             backtrack_time = backtrack_time / num_runs
             remembering_no_goods_time = remembering_no_goods_time / num_runs
 
+            # Print results
             print(f"\tBacktracking: {backtrack_successes} / {num_runs} succeeded with average time of {backtrack_time*1000} milliseconds")
             print(f"\tRemembering No-Goods: {remembering_no_goods_successes} / {num_runs} succeeded with average time of {remembering_no_goods_time*1000} milliseconds")
 
