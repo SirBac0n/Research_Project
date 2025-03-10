@@ -107,11 +107,17 @@ def main():
         algorithm = input("Invalid input, please enter 'b' or 'n': ")
     # Get the buffer period for between MTAs
     buffer = -1
-    try:
-        buffer = int(input("Enter the buffer period for minutes between MTAs: "))
-    except:
-        while not isinstance(buffer, int) or buffer < 0: 
-            buffer = int(input("Invalid input, please enter a positive integer: "))
+    while True:
+        # Keep looping till we get a valid integer that is greater than 0
+        try:
+            buffer = int(input("Enter the buffer period for minutes between MTAs (will be converted to divisible by five): "))
+            if buffer >= 0: break
+        except:
+            pass
+        print("Invalid input, please enter a positive integer. ",end='')
+    # Make sure it is divisible by five
+    remainder = buffer % 5
+    buffer = buffer + (5-remainder) if remainder > 2 else buffer - remainder
     # Get whether the user wants a verbose run or not
     verbosity: str = input("Would you like verbose output ('yes'/'no')? ").strip().lower()
     while verbosity not in ['yes','no']:
