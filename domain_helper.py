@@ -1,5 +1,12 @@
-from MTA_Helper import MTA, Time_Block
+
+""" Authors: Seth Harmon
+    Course:  COMP 445
+    Date:    10 March 2025
+    Description: file with code to help get domains
+"""
+
 from datetime import timedelta
+from MTA_Helper import MTA, Time_Block
 
 def get_domains(mtas: list[MTA], idx: int = 0) -> list[list[Time_Block]]:
     """

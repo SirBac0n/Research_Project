@@ -1,3 +1,11 @@
+
+""" Authors: Keith Graybill
+    Course:  COMP 445
+    Date:    10 March 2025
+    Description: file to create problem instances
+    Run with: ./problem_instances.py
+"""
+
 import random
 from faker import Faker
 from random import randrange
@@ -5,10 +13,17 @@ import pandas as pd
 import sys
 
 # Create initialized global list variables
-mta_types: list[str] = ['Preaching','Apologetics','Music','Puppetry','Bible Teaching','Inspirational Writing','Drama','Gospel Art','Sign Language','Worship Leading']
+mta_types: list[str] = ['Preaching','Apologetics','Music','Puppetry','Bible Teaching','Inspirational Writing',
+                        'Drama','Gospel Art','Sign Language','Worship Leading']
 days_of_the_week: list[str] = ['Monday','Tuesday','Wednesday','Thursday','Friday']
 
 def generate_students(n: int) -> list[str]:
+    """Create a list of n randomly generated student names
+    
+    n: the number of students to be generated
+
+    return a list of student names
+    """
     fake: Faker = Faker()
     names: list[str] = []
     # Generate n names
@@ -21,6 +36,14 @@ def generate_students(n: int) -> list[str]:
     return names
 
 def hour_change(time_str: str, hour_change: int) -> str:
+    """Changes a string time by a spcecified number of hours
+    
+    time_str: the time string of the format HH:MM (e.g. '14:25')
+
+    hour_change: the number of hours to be changed by
+
+    returns a new string time with updated hour
+    """
     hour, minute = time_str.split(':')
     return f'{int(hour)+hour_change}:{minute}'
 
@@ -62,30 +85,48 @@ def random_time_range(start_time_input: str, end_time_input: str):
     if end_hour == '23' and end_minute != '00':
         max_hour = 23 + 1
     else:
-        max_hour = end_hour #CHANGED TO end_hour
+        max_hour = end_hour
 
+    # Get minutes
+    minutes = ''
     if start_minute > end_minute:
         minutes = randrange(int(end_minute), int(start_minute))
     elif start_minute < end_minute:
         minutes = randrange(int(start_minute), int(end_minute))
 
+    # Get hours
     hours = ''
     if start_hour == end_hour:
         hours = start_hour
     elif start_hour != end_hour:
         hours = randrange(int(start_hour), int(max_hour))
 
+    # Adjust minutes if needed
     if str(hours) == str(end_hour):
         minutes = randrange(int(start_minute)//5, int(end_minute)//5) * 5
     else:
         minutes = randrange(0, 12) * 5
 
+    # Conver the hours and minutes to ints
     h = int(hours)
     m = int(minutes)
 
+    # Return in the correct format
     return f"{h:02d}:{m:02d}"
 
-def generate_mta_availabilities(min_time: str = '09:00', max_time: str = '17:00', file_path: str | None = 'DATA/mta_type_availability.xlsx') -> pd.DataFrame:
+def generate_mta_availabilities(min_time: str = '09:00', max_time: str = '17:00', 
+                                file_path: str | None = 'DATA/mta_type_availability.xlsx') -> pd.DataFrame:
+    """Creates MTA Availabilities and saves it to an Excel file
+    
+    min_time: the earliest beginning availability time of the format HH:MM (e.g. '14:25')
+    
+    max_time: the latest ending availability time of the format HH:MM
+
+    file_path: the file path to save the results to or None if no file save is desired
+
+    return a pandas DataFrame with the results
+    """
+    
     # Initialize the dataframe
     df = pd.DataFrame(columns=['Type','Availability Day','Availability Start Time','Availability End Time'])
     # Loop through all the MTA types
@@ -108,7 +149,20 @@ def generate_mta_availabilities(min_time: str = '09:00', max_time: str = '17:00'
 
     return df
 
-def generate_student_unavailabilities(students: list[str], min_time: str = '09:00', max_time: str = '17:00',file_path: str | None = 'DATA/student_unavailability.xlsx') -> pd.DataFrame:
+def generate_student_unavailabilities(students: list[str], min_time: str = '09:00', max_time: str = '17:00',
+                                      file_path: str | None = 'DATA/student_unavailability.xlsx') -> pd.DataFrame:
+    """Creates Student Unavailabilities and saves it to an Excel file
+    
+    students: the list of student names to create unavailabilites for
+
+    min_time: the earliest beginning unavailability time of the format HH:MM (e.g. '14:25')
+    
+    max_time: the latest ending unavailability time of the format HH:MM
+
+    file_path: the file path to save the results to or None if no file save is desired
+
+    return a pandas DataFrame with the results
+    """
     # Initialize the dataframe
     df = pd.DataFrame(columns=['Student Name','Unavailability Day','Unavailability Start Time','Unavailability End Time'])
     # Loop through all the students
@@ -131,7 +185,22 @@ def generate_student_unavailabilities(students: list[str], min_time: str = '09:0
     
     return df
 
-def generate_mtas(students: list[str], n: int, max_students_per_mta: int = 2, mta_lengths: list[int] = [30,45], file_path: str | None = 'DATA/mtas.xlsx') -> pd.DataFrame: 
+def generate_mtas(students: list[str], n: int, max_students_per_mta: int = 2, mta_lengths: list[int] = [30,45], 
+                  file_path: str | None = 'DATA/mtas.xlsx') -> pd.DataFrame: 
+    """Creates MTAs save them to an Excel file
+    
+    students: list of students to create MTAs for
+
+    n: number of MTAs to create
+
+    max_students_per_mta: maximum number of students that can participate in an MTA
+
+    mta_lengths: a list of the potential MTA lengths in minutes
+
+    file_path: the file path to save the results to or None if no file save is desired
+
+    return a pandas DataFrame with the results
+    """
     # Initialize the dataframe
     df = pd.DataFrame(columns=['Type','Students','Length (minutes)','Name'])
     # Generate n different MTA's
@@ -185,6 +254,6 @@ def main():
     # Generate problem instance
     generate_problem_instances(n_students,n_mtas)
     print("Problem instance created!")
-    
+
 if __name__ == '__main__':
     main()

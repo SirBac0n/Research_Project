@@ -1,5 +1,10 @@
-from datetime import datetime
+""" Authors: Seth Harmon (created classes) and Keith Graybill (implemented __eq__, __hash__, and __str__ methods)
+    Course:  COMP 445
+    Date:    10 March 2025
+    Description: file with helper code including classes
+"""
 
+from datetime import datetime
 
 class Time_Block:
     """
