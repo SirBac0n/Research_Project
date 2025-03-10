@@ -161,7 +161,30 @@ def generate_problem_instances(n_students: int, n_mtas: int):
     # Generate the MTA's themselves
     generate_mtas(students,n_mtas,mta_lengths=[30,45])
 
-if __name__ == '__main__':
-    n_students = int(sys.argv[1])
-    n_mtas = int(sys.argv[2])
+def main():
+    # Get number of students
+    n_students = -1
+    while True:
+        # Keep looping till we get a valid integer that is greater than 0
+        try:
+            n_students = int(input("Enter the desired number of students: "))
+            if n_students > 0: break
+        except:
+            pass
+        print("Invalid input, please enter a positive integer. ",end='')            
+    # Get number of MTAs
+    n_mtas = -1
+    while True:
+        # Keep looping till we get a valid integer that is greater than 0
+        try:
+            n_mtas = int(input("Enter the desired number of MTAs: "))
+            if n_mtas > 0: break
+        except:
+            pass
+        print("Invalid input, please enter a positive integer. ",end='') 
+    # Generate problem instance
     generate_problem_instances(n_students,n_mtas)
+    print("Problem instance created!")
+    
+if __name__ == '__main__':
+    main()
