@@ -1,8 +1,14 @@
-from datetime import datetime
 
-import pandas as pd
+""" Authors: Seth Harmon
+    Course:  COMP 445
+    Date:    10 March 2025
+    Description: file solve the MTA problem
+    Run with: ./MTA_Solver.py
+"""
+
 import sys
-
+import pandas as pd
+from datetime import datetime
 from backtrack import backtrack
 from domain_helper import get_domains
 from MTA_Helper import MTA, MTA_Type, Student, Time_Block
