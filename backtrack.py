@@ -1,8 +1,14 @@
-import copy
-from MTA_Helper import MTA, Time_Block, MTA_Type, Student
-from domain_helper import get_domains
-from datetime import timedelta
 
+""" Authors: Seth Harmon (Backtrack Logic) and Keith Graybill (Rembering No-Goods logic)
+    Course:  COMP 445
+    Date:    10 March 2025
+    Description: file that runs backtracking or remembering no-goods search
+"""
+
+import copy
+from datetime import timedelta
+from domain_helper import get_domains
+from MTA_Helper import MTA, Time_Block, MTA_Type, Student
 
 no_goods: set[tuple[int, tuple[MTA_Type, ...], tuple[Student, ...]]] = set()
 
@@ -52,12 +58,14 @@ def backtrack(mtas: list[MTA], domains: list[list[Time_Block]], next_var: int = 
 
     for value in domains[next_var]:
         if verbosity == 1 or verbosity == 2:
-            print(f"Assigning {mtas[next_var]} at time {value.start_time.time()}")
             if verbosity == 2:
-                print(next_var)
+                print("Assigned Domains:")
                 for i in range(next_var):
-                    print(i)
-                    print(domains[i])
+                    # print(i)
+                    print(f"\tDomains for {mtas[i]}: {domains[i]}")
+                # Tab in for next line if verbosity == 2
+                print("\t",end='')
+            print(f"Assigning {mtas[next_var]} at time {value.start_time.time()}")
         consistent = True
         # check if the value is in the available time slots for that MTA type
         for time in mtas[next_var].type.times:
