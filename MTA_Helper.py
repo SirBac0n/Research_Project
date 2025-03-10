@@ -12,7 +12,7 @@ class Time_Block:
         self.day = day
 
     def __str__(self):
-        return f"{self.day}: {self.start_time} - {self.end_time}"
+        return f"{self.day}: {self.start_time.time()} - {self.end_time.time()}"
     
     def __eq__(self, value: object) -> bool:
         if not isinstance(value, Time_Block):
@@ -30,10 +30,7 @@ class Student:
         self.unavailable_times = unavailable_times
 
     def __str__(self):
-        ret_str = f"{self.name}:\n"
-        for time in self.unavailable_times:
-            ret_str += f"{time}\n"
-        return ret_str
+        return self.name
     
     def __eq__(self, value: object) -> bool:
         # Not equal if value is not a Student or if names are different
@@ -63,10 +60,7 @@ class MTA_Type:
         self.times = times
 
     def __str__(self):
-        ret_str = f"{self.name}:\n"
-        for time in self.times:
-            ret_str += f"{time}\n"
-        return ret_str
+        return self.name
 
     def __eq__(self, value: object) -> bool:
         # Not equal if value is not a MTA Type or if names are different
@@ -98,10 +92,5 @@ class MTA:
         self.length = length
 
     def __str__(self):
-        ret_str = f"{self.type}:\n"
-        for student in self.students:
-            ret_str += f"{student}\n"
-        ret_str += f"Length: {self.length}\n"
-        for time in self.times:
-            ret_str += f"{time}\n"
-        return ret_str
+        return f"MTA of type {self.type} for the following students: {", ".join([str(student) for student in self.students])} that is {self.length} minutes"
+        

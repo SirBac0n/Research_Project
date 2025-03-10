@@ -115,6 +115,7 @@ def main():
     mtas = read_mtas()
     domains = get_domains(mtas)
     algorithm = input("Enter 'b' for backtracking search or 'n' for remembering no goods: ").lower()
+    buffer = -1
     while algorithm != "b" and algorithm != "n":
         algorithm = input("Invalid input, please enter 'b' or 'n': ")
     try:
@@ -122,16 +123,16 @@ def main():
     except:
         while not isinstance(buffer, int): 
             buffer = int(input("Invalid input, please enter a positive integer: "))
+    verbosity: str = input("Would you like verbose output ('yes'/'no')? ").strip().lower()
+    while verbosity not in ['yes','no']:
+        verbosity = input("Would you like verbose output ('yes'/'no')? ").strip().lower()
+    is_verbose = True if verbosity == 'yes' else False
+    print(is_verbose)
     while buffer < 0:
         buffer = int(input("Invalid input, please enter a positive integer: "))
-    if algorithm == "b":
-        result = backtrack(mtas, domains, buffer=buffer)
-        for i in range(len(result)):
-            print(f"{mtas[i].type.name} = {result[i]}")
-    else:
-        result = backtrack(mtas, domains, buffer=buffer, remember_no_goods=True)
-        for i in range(len(result)):
-            print(f"{mtas[i].type.name} = {result[i]}")
+    result = backtrack(mtas, domains, buffer=buffer, remember_no_goods=(algorithm == 'n'), verbose=is_verbose)
+    for i in range(len(result)):
+        print(f"{mtas[i].type.name} = {result[i]}")
 
 if __name__ == "__main__":
     main()
