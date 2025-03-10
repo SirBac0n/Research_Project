@@ -7,7 +7,7 @@ from datetime import timedelta
 no_goods: set[tuple[int, tuple[MTA_Type, ...], tuple[Student, ...]]] = set()
 
 def backtrack(mtas: list[MTA], domains: list[list[Time_Block]], next_var: int = 0, buffer: int = 5, 
-              remember_no_goods: bool = False, verbose: bool = False) -> list[list[Time_Block]] | None:
+              remember_no_goods: bool = False, verbosity: int = 0) -> list[list[Time_Block]] | None:
     """
     Runs basic backtracking search on the given MTA problem
 
@@ -46,13 +46,18 @@ def backtrack(mtas: list[MTA], domains: list[list[Time_Block]], next_var: int = 
         curr_students = tuple(curr_students)
         # If we have seen the above sets before, there is no solution here
         if (next_var,curr_mta_types,curr_students) in no_goods:
-            if verbose:
+            if verbosity == 1 or verbosity == 2:
                 print(f"No solution found for {mtas[next_var]}")
             return None
 
     for value in domains[next_var]:
-        if verbose:
+        if verbosity == 1 or verbosity == 2:
             print(f"Assigning {mtas[next_var]} at time {value.start_time.time()}")
+            if verbosity == 2:
+                print(next_var)
+                for i in range(next_var):
+                    print(i)
+                    print(domains[i])
         consistent = True
         # check if the value is in the available time slots for that MTA type
         for time in mtas[next_var].type.times:
@@ -114,9 +119,9 @@ def backtrack(mtas: list[MTA], domains: list[list[Time_Block]], next_var: int = 
                 # generate new domains after assignment
                 new_domains.extend(get_domains(new_mtas, next_var + 1)) #type: ignore
                 result = backtrack(new_mtas, new_domains, next_var + 1, buffer, 
-                                   remember_no_goods=remember_no_goods, verbose=verbose)
+                                   remember_no_goods=remember_no_goods, verbosity=verbosity)
                 if result:
-                    if verbose:
+                    if verbosity == 1 or verbosity == 2:
                         print(f"Solution found at depth {next_var}!")
                     return result
         if not consistent:
@@ -127,6 +132,6 @@ def backtrack(mtas: list[MTA], domains: list[list[Time_Block]], next_var: int = 
         # Add a no-good instance to our set of no-goods
         no_goods.add((next_var,curr_mta_types,curr_students))
 
-    if verbose:
+    if verbosity == 1 or verbosity == 2:
         print(f"No solution found for {mtas[next_var]}")
     return None
