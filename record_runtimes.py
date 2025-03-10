@@ -69,8 +69,13 @@ def main():
 
         df.to_csv("DATA/runtime_record.csv")
     
+
     # Read in data and create dataframes
-    df = pd.read_csv("DATA/runtime_record.csv")
+    try:
+        df = pd.read_csv("DATA/runtime_record.csv")
+    except Exception:
+        print("File DATA/runtime_record.csv does not exist. Please create a new runtime record.")
+        return
     b = df.loc[df["Algorithm"] == "Backtracking"]
     n = df.loc[df["Algorithm"] == "Remembering No Goods"]
     b_avgs = b.groupby("Number of MTAs")["Runtime"].mean()
