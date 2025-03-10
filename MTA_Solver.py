@@ -98,42 +98,33 @@ def main():
     """
     Solves MTA problems using two different algorithms and runs tests
     """
-    """mtas = read_mtas()
-    domains = get_domains(mtas)
-    no_goods: bool = True if sys.argv[1] == 'r' else False
-    if not no_goods:
-        print("Backtracking...")
-    else:
-        print("Remembering no-goods...")
-    result = backtrack(mtas, domains,remember_no_goods=no_goods)
-    if result is None:
-        print("No result found")
-        return
-    print("Result found!")
-    for item in result: 
-        print(item)"""
+    # Read in MTAs and domains
     mtas = read_mtas()
     domains = get_domains(mtas)
+    # Ask user for the algorithm to ues
     algorithm = input("Enter 'b' for backtracking search or 'n' for remembering no goods: ").lower()
-    buffer = -1
     while algorithm != "b" and algorithm != "n":
         algorithm = input("Invalid input, please enter 'b' or 'n': ")
+    # Get the buffer period for between MTAs
+    buffer = -1
     try:
-        buffer = int(input("Enter the buffer period between MTAs: "))
+        buffer = int(input("Enter the buffer period for minutes between MTAs: "))
     except:
-        while not isinstance(buffer, int): 
+        while not isinstance(buffer, int) or buffer < 0: 
             buffer = int(input("Invalid input, please enter a positive integer: "))
+    # Get whether the user wants a verbose run or not
     verbosity: str = input("Would you like verbose output ('yes'/'no')? ").strip().lower()
     while verbosity not in ['yes','no']:
         verbosity = input("Would you like verbose output ('yes'/'no')? ").strip().lower()
-    is_verbose = True if verbosity == 'yes' else False
-    print(is_verbose)
-    while buffer < 0:
-        buffer = int(input("Invalid input, please enter a positive integer: "))
-    result = backtrack(mtas, domains, buffer=buffer, remember_no_goods=(algorithm == 'n'), verbose=is_verbose)
+    # Run search
+    result = backtrack(mtas, domains, buffer=buffer, remember_no_goods=(algorithm == 'n'), verbose=(verbosity == 'yes'))
+    # Print results
     if result:
+        print("\nResult found:")
         for i in range(len(result)):
             print(f"{mtas[i].type.name} = {result[i]}")
+    else:
+        print("\nNo result found")
 
 if __name__ == "__main__":
     main()
